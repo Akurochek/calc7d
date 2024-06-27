@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Example</title>
+    <style>
+
+img{
+    border-radius: 10px;
+}
+
+
+
+
+.button-container {
+            margin: 5px 0;
+            margin-top: 7px;
+            margin-bottom: 12px;
+        }
+        .btn {
+            border: 2px solid gold;
+            color: black;
+            background-color: transparent;
+            padding: 5px 20px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .btn.selected {
+            
+            background-color: rgb(255, 179, 0);
+        }
+        .colors div {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid #000;
+        }
+
+
+
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+html, body {
+    overflow: hidden;
+}
+.cordinateMenu{
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    
+    padding: 4px;
+    background-color:#242e38;
+    color: white;
+    text-align: center;
+    font-size:12px;
+}
+
+.colors div {
+    margin: 0;
+  border-radius: 8px; 
+  transition: box-shadow 0.3s ease, border 0.3s ease; 
+}
+
+.colors div:nth-child(1) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #c0392b; /* более серьезный оттенок красного */
+  color: #fff;
+}
+
+.colors div:nth-child(2) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #27ae60; /* более серьезный оттенок зеленого */
+  color: #fff;
+}
+
+.colors div:nth-child(3) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #2980b9; /* более серьезный оттенок синего */
+  color: #fff;
+}
+
+.colors div:nth-child(4) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #4e3816; /* более серьезный оттенок желтого */
+  color: #ffffff;
+}
+
+.colors div:nth-child(5) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #8e44ad; /* более серьезный оттенок фиолетового */
+  color: #fff;
+}
+
+.colors div:nth-child(6) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #d35400; /* более серьезный оттенок оранжевого */
+  color: #fff;
+}
+
+.colors div:nth-child(7) {
+  height: 60px;
+  width: 60px;
+  font-size: 10px;
+  background-color: #16a085; /* более серьезный оттенок бирюзового */
+  color: #fff;
+}
+
+/* При наведении добавляем эффект золотой тени и золотую обводку */
+.colors div:hover {
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* золотая тень */
+  border: 2px solid #ffd700; /* золотая обводка */
+}
+
+
+
+
+
+
+
+
+
+
+
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        
+
+       
+
+        .menu {
+            background-color: #f1f1f1;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            transition: height 0.3s;
+            overflow: hidden;
+        }
+
+        .menu-buttons {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+        }
+
+        .menu {
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+}
+
+.menu.expanded {
+    height: 300px; /* Adjust as needed for content height */
+}
+
+.menu-buttons button {
+    
+    background-color: #ddd;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    font-size: 16px;
+    border-radius: 5px;
+    margin: 5px;
+    margin-left: 25px;
+}
+
+.menu-buttons button:hover {
+    background-color: #ccc;
+    transform: scale(1.05);
+}
+
+.menu-buttons button.active {
+    background-color: #242e38;
+    color: white;
+    transform: scale(1.1);
+}
+
+
+        .content {
+            display: none; /* Скрываем все блоки контента по умолчанию */
+            padding: 20px;
+            width: 100%;
+            box-sizing: border-box;
+            flex-direction: row; /* Располагаем .left и .right в строку */
+            align-items: flex-start; /* Выравниваем .left и .right по верхнему краю */
+        }
+
+        .content.active {
+            display: flex; /* Показываем активный блок контента */
+        }
+
+        .left {
+    width: 20%;
+    padding-right: 20px;
+    background-color: #f2f2f2; /* Светлый серый фон */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Тень */
+    margin-right: 20px; /* Отступ справа */
+    flex: 1; /* Занимает доступное пространство */
+    transition: width 0.3s ease, box-shadow 0.3s ease; /* Анимация для ширины и тени */
+}
+
+.left:hover {
+    width: 25%; /* Увеличиваем ширину при наведении */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Увеличиваем тень при наведении */
+}
+
+.left h2 {
+    margin-bottom: 10px;
+    color: #000000; /* Тёмный цвет текста заголовка */
+}
+
+.left p {
+    color: #575656; /* Средний цвет текста описания */
+    font-size: 14px; /* Размер шрифта */
+    line-height: 1.5; /* Межстрочный интервал */
+}
+
+
+        .right {
+            width: 80%;
+            border-left: 1px solid #ccc; /* Бордюр между left и right */
+            padding-left: 40px;
+            padding-bottom: 100%;
+            box-sizing: border-box; /* Учитываем padding в общей ширине */
+        }
+
+        .slider-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+.unit{
+    margin-right: 50%;
+}
+.slider-container label {
+    color: #515151; /* Темный цвет текста метки */
+    width: 100px; /* Ширина метки */
+}
+
+.range-input {
+    flex: 1;
+    -webkit-appearance: none;
+    appearance: none;
+    height: 6px; /* Уменьшенная высота ползунка */
+    background: linear-gradient(to right, #ffd700, #ffa500); /* Градиент от желтого к оранжевому */
+    outline: none;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.range-input::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px; /* Уменьшенный размер кругового ползунка */
+    height: 15px; /* Уменьшенный размер кругового ползунка */
+    background-color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.number-input {
+    width: 60px;
+    padding: 4px;
+    padding-left: 10px;
+    margin-right: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.number-input:hover {
+    outline: none;
+    border-color: #ffd700; /* Золотая обводка при наведении */
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.8); /* Золотая тень при наведении */
+}
+
+.slider-container span {
+    margin-left: 10px;
+    color: #515151;
+}
+
+
+
+        .colors {
+            display: flex;
+            gap: 10px; 
+        }
+
+        .colors div {
+            width: 100px;
+            height: 100px;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .images {
+    display: flex;
+    gap: 10px;
+}
+
+.images img {
+    width: 100px;
+    height: 100px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.images3 img.selected {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* золотая тень */
+    border: 2px solid #ffd700; /* золотая обводка */
+}
+
+        .colors div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: white;
+        }
+
+        .upload-btn {
+    display: inline-block; /* Use inline-block to make the button only take the necessary width */
+    margin: 0;
+    background-color: #fff; /* White background */
+    border: 2px solid #ffd700; /* Golden border */
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #333; /* Text color */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Transition for shadow and border color */
+}
+
+.upload-btn:hover {
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.7); /* Golden shadow on hover */
+    border-color: #ffdf00; /* Lighter golden border on hover */
+}
+
+
+
+        /* Стили для крестика закрытия меню */
+        .close-menu {
+            cursor: pointer;
+            padding: 10px;
+            margin-left: auto; /* Располагаем крестик в правом углу */
+            font-size: 20px;
+        }
+
+        .close-menu:hover {
+            background-color: #ddd;
+        }
+    </style>
+</head>
+<body>
+  <div class="cordinateMenu"> Адресс: Улица Вернадского</div>
+
+    
+
+    <canvas class="canvas"></canvas>
+    
+    
+
+<div class="menu">
+    <div class="menu-buttons">
+        <button class="mb" data-target="sizes">Размеры</button>
+        <button class="mb"data-target="construction">Конструкция</button>
+        <button class="mb"data-target="openings">Проемы</button>
+        <button class="mb"data-target="color">Цвет</button>
+        <button class="mb"data-target="decoration">Ландшафт</button>
+        <span class="close-menu" >✖</span>
+    </div>
+
+    <div id="sizes" class="content">
+        <div class="left">
+            <h2>Размеры</h2>
+            <p>Выберите размеры вашего здания</p>
+        </div>
+        <div class="right">
+            <div class="slider-container">
+                <label for="widthRange">Ширина (м):</label>
+                <input type="range" id="widthRange" class="range-input" min="3" max="35" value="15" oninput="syncWidthValue(this.value)">
+                <input type="number" id="widthInput" class="number-input" min="3" max="35" value="15" oninput="syncWidthRange(this.value)">
+                <span class="unit"></span>
+            </div>
+            <div class="slider-container">
+                <label for="lengthRange">Длина (м):</label>
+                <input type="range" id="lengthRange" class="range-input" min="5" max="150" value="15" oninput="syncLengthValue(this.value)">
+                <input type="number" id="lengthInput" class="number-input" min="5" max="150" value="15" oninput="syncLengthRange(this.value)">
+                <span class="unit"></span>
+            </div>
+            <div class="slider-container">
+                <label for="heightRange">Высота (м):</label>
+                <input type="range" id="heightRange" class="range-input" min="3" max="15" value="6" oninput="syncHeightValue(this.value)">
+                <input type="number" id="heightInput" class="number-input" min="3" max="15" value="6" oninput="syncHeightRange(this.value)">
+                <span class="unit"></span>
+            </div>
+            
+            
+            
+        </div>
+    </div>
+
+    <div id="construction" class="content">
+        <div class="left">
+            <h2>Конструкция</h2>
+            <p>Выберите тип конструкции в зависимости от строительной технологии и условий проекта</p>
+        </div>
+        <div class="right">
+            <div class="images">
+                <img src="roof1.jpeg" alt="Конструкция 1">
+                <img src="roof2.jpeg" alt="Конструкция 2">
+            </div>
+        </div>
+    </div>
+
+    <div id="openings" class="content">
+        <div class="left">
+            <h2>Проемы</h2>
+            <p>Создавайте проемы под ваши ворота, двери и окна</p>
+        </div>
+        <div class="right">
+            <div class="images">
+                <img src="opening1.png" alt="Проем 1">
+                <img src="opening3.jpeg" alt="Проем 3">
+                <img src="opening2.png" alt="Проем 2">
+                
+            </div>
+        </div>
+    </div>
+
+    <div id="color" class="content">
+        <div class="left">
+            <h2>Цвет</h2>
+            <p>Создавайте уникальный индивидуальный дизайн проект бесплатно</p>
+            
+            
+        </div>
+        <div class="right">
+            <label>Цвет для:</label>
+            <div class="button-container">
+                <button id="roof-button" class="btn selected">Кровля</button>
+                <button id="wall-button" class="btn">Стены</button>
+            </div>
+            <div class="colors">
+                <div>3020</div>
+                <div>121</div>
+                <div>24</div>
+                <div>1221</div>
+                <div>2215</div>
+                <div>2298</div>
+                <div>9766</div>
+                
+                <!-- Добавьте еще цвета здесь -->
+            </div>
+        </div>
+    </div>
+
+    <div id="decoration" class="content">
+        <div class="left">
+            <h2>Ландшафт</h2>
+            <p>Выберите одну из картинок или выберите ландшафт в своей галерее</p>
+        </div>
+        <div class="right">
+            <div class="images images3">
+                <img src="icon1.jpeg" alt="Проем 1">
+                <img src="icon2.JPG" alt="Проем 2">
+                <img src="icon3.JPG" alt="Проем 2">
+                <img src="icon4.jpeg" alt="Проем 2">
+            </div>
+            
+
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="js/script.js"></script>
+</body>
+</html>
